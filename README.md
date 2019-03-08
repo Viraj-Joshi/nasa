@@ -1,3 +1,7 @@
+# This project is for the Capital One SWE Summit Program
+My goal is to learn React and Firebase to the best of my ability!
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
