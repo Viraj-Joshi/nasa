@@ -1,0 +1,9 @@
+.search_box{
+    padding-top: 30vh;
+    z-index: 9000;
+}
+.search_description{
+        /* padding: 3% 0% 3% 3%; */
+    display: block;
+    
+}
