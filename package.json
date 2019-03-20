@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "firebase": "^5.8.5",
+    "formik": "^1.5.1",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.8.3",
+    "react-datepicker": "^2.2.0",
     "react-dom": "^16.8.3",
     "react-grid-gallery": "^0.5.4",
     "react-materialize": "^2.6.0",

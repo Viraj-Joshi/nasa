@@ -40,7 +40,7 @@ class Background extends Component {
     render() {
        return (
            <div className = "background">
-                <Gallery images={IMAGES}/>]
+                <Gallery images={IMAGES}/>
            </div>
        );
     }
