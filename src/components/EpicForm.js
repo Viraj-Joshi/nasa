@@ -1,20 +1,44 @@
-import React, {Component} from 'react';
+// now we are free to use the state of the parent component as a prop to generate the images
 
+
+import React, {Component} from 'react';
 import M from "materialize-css";
 class EpicForm extends Component{
     componentDidMount(){
         M.AutoInit();
     }
     render(){
-        const IMAGE_FIELD 
-        const startDate = this.props.formValues['start_date'];
-        const endDate = this.props.formValues['end_date'];
+        const EPIC_metadata = 'https://epic.gsfc.nasa.gov/archive/natural';
+        let EPIC;
+        // if (this.props.formValues["selectedCategory"] === '1'){
+            var IMAGE_FIELD = {
+                src: "",
+                thumbnail: "",
+                thumbnailWidth: 100,
+                thumbnailHeight: 100,
+                isSelected: false, 
+                caption: ""   
+            }
+            var d1 = this.props.dates["startDate"].toString();
+            console.log(d1);
+            var d2 = this.props.dates["endDate"].toString();
+            
+            const isSameDate = d1 === d2;
+            if(d1 !== ""){
+            const year = d1.substring(d1.length-4);
+            const month = d1.substring(d1.length-1);
 
-        const isSame = startDate === endDate;
+            console.log(year);  
+            }
+            if(isSameDate){
+                // fetch(EPIC_metadata + '/')
+            }
+        // }
+            
+        
         return(
-           if(isSame){
-
-           }
+        //    {EPIC}
+        <div></div>
         );
     }
 }
