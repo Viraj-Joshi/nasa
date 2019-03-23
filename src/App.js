@@ -19,12 +19,13 @@ class App extends Component {
           search: '',
           selectedCategory: "",
           latitude: "",
-          longititude: "",
+          longitude: "",
+          isValid:false,
       },
       dates:{
         startDate: "",
         endDate: ""
-      }
+      },
     };
    
   }
@@ -35,7 +36,7 @@ class App extends Component {
     let formValues = this.state.formValues;
     let name = event.target.name;
     let value = event.target.value;
-    console.log(name + ": "  + value);
+    //console.log(name + ": "  + value);
     formValues[name] = value;
 
     if(event.target.dataset.id > 0){
@@ -46,22 +47,54 @@ class App extends Component {
     this.setState({formValues});
   }
 
-  //have physically given up trying to make Materialize Datepicker work....i.e more handlers
+  //have physically given up trying to make Materialize Datepicker work....i.e one extra handler and another library
   handleStartDateChange(day){
     let dates = this.state.dates;
-    
-    this.setState(dates["startDate"] =  day);
+    dates["startDate"] =  day;
+    this.setState({dates});
   }
   handleEndDateChange(day){
     let dates = this.state.dates;
-    
-    this.setState(dates["endDate"] = day);
+    dates["endDate"] = day;
+    this.setState({dates});
   }
   
   
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.dates);
+    
+    
+    if(this.state.dates["startDate"]!=="" && this.state.dates["endDate"]!=="" &&
+        (this.state.dates["endDate"] < this.state.dates["startDate"] || this.state.dates["startDate"] > this.state.dates["endDate"])){
+      let formValues = this.state.formValues;
+      formValues["isValid"] = false
+      this.setState({formValues})
+      alert("Please enter a chronological date order");
+    }else if(this.state.formValues["selectedCategory"]==='1'){
+      //regex blatantly stolen from Stack Overflow
+      var regex_lat= /^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/;
+      var regex_long = /^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/
+      var lat = this.state.formValues["latitude"];
+      var long = this.state.formValues["longitude"];
+
+      if(!lat.match(regex_lat) && (lat !== "")){
+        let formValues = this.state.formValues;
+        formValues["isValid"] = false;
+        this.setState({formValues});
+        alert("improper latitude format");
+      }else if(!long.match(regex_long) && (long !== "")){
+        let formValues = this.state.formValues;
+        formValues["isValid"] = false;
+        this.setState({formValues});
+        alert("improper longitude format");
+      }else if((long === "" && lat === "") || (lat.match(regex_lat) && long.match(regex_long))){
+        let formValues = this.state.formValues;
+        formValues["isValid"] = true;
+        this.setState({formValues});
+    }
+    console.log(this.state.formValues);
+
+    }
   } 
   
   render() {
@@ -86,8 +119,9 @@ class App extends Component {
           handleEndDateChange = {this.handleEndDateChange}
           handleSubmit = {this.handleSubmit}
         />
-      
-      {formType}
+      <div className = "container row">
+        {formType}
+      </div>
       
         
 

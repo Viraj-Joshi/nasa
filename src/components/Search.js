@@ -41,7 +41,7 @@ class Search extends Component{
                                 <input name = "latitude" 
                                     id = "input_lat"
                                     type="text"
-                                    className = "validate" 
+                                    // className = "validate" 
                                     // value={this.props.formValues["latitude"]} 
                                     onChange={this.props.handleInputChange}
                                 />
@@ -52,7 +52,7 @@ class Search extends Component{
                             <input name = "longitude"
                                 id = "input_long" 
                                 type="text"
-                                className = "validate" 
+                                // className = "validate" 
                                 // value={this.props.formValues["longitude"]} 
                                 onChange={this.props.handleInputChange}
                             />
@@ -126,7 +126,7 @@ class Search extends Component{
                             
                                 <DayPickerInput name = "endDate" formatDate={formatDate}
                                     parseDate={parseDate}
-                                    placeholder={`${formatDate(new Date())}`} onDayChange={this.props.handleEndDateChange} />
+                                    placeholder={`${formatDate(new Date(),'MM-DD-YYYY')}`} onDayChange={this.props.handleEndDateChange} />
                             </div>
                             
                         </div>
