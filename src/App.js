@@ -21,6 +21,7 @@ class App extends Component {
           latitude: "",
           longitude: "",
           isValid:false,
+          // IMAGES: [],
       },
       dates:{
         startDate: "",
@@ -52,6 +53,7 @@ class App extends Component {
     let dates = this.state.dates;
     dates["startDate"] =  day;
     this.setState({dates});
+    console.log(this.state.dates["startDate"])
   }
   handleEndDateChange(day){
     let dates = this.state.dates;
@@ -70,7 +72,17 @@ class App extends Component {
       formValues["isValid"] = false
       this.setState({formValues})
       alert("Please enter a chronological date order");
-    }else if(this.state.formValues["selectedCategory"]==='1'){
+    }else if(this.state.dates["startDate"] === undefined || this.state.dates["endDate"] === undefined){
+      alert("Please select a date rather than type a date");
+      let formValues = this.state.formValues;
+      formValues["isValid"] = false
+      this.setState({formValues})
+    }else{
+        let formValues = this.state.formValues;
+        formValues["isValid"] = true;
+        this.setState({formValues});
+    }
+    if(this.state.formValues["selectedCategory"]==='1' && this.state.formValues["isValid"]){
       //regex blatantly stolen from Stack Overflow
       var regex_lat= /^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/;
       var regex_long = /^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/
@@ -87,11 +99,20 @@ class App extends Component {
         formValues["isValid"] = false;
         this.setState({formValues});
         alert("improper longitude format");
+      }else if((lat === "" && long !=="") || (lat !== "" && long ==="") ){
+        let formValues = this.state.formValues;
+        formValues["isValid"] = false;
+        this.setState({formValues});
+        alert("Must enter both latitude and longitude");
       }else if((long === "" && lat === "") || (lat.match(regex_lat) && long.match(regex_long))){
         let formValues = this.state.formValues;
         formValues["isValid"] = true;
         this.setState({formValues});
     }
+    // let formValues = this.state.formValues;
+    // formValues["IMAGES"] = [];
+    // this.setState({formValues});
+    
     console.log(this.state.formValues);
 
     }
@@ -100,7 +121,7 @@ class App extends Component {
   render() {
 
     let formType;
-    if(this.state.formValues["selectedCategory"] === '1'){
+    if(this.state.formValues["selectedCategory"] === '1' && this.state.formValues["isValid"]){
       formType =  <EpicForm 
                     formValues = {this.state.formValues}
                     dates = {this.state.dates}
