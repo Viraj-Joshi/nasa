@@ -48,6 +48,7 @@ class LandSatForm extends Component{
         
         this._isMounted && this.getData(this.props.dateInfo1["year"], this.props.dateInfo1["month"], this.props.dateInfo1["day"], this.props.formValues["latitude"],this.props.formValues["longitude"]);
         this._isMounted && this.setState({isLoading:true})
+        this._isMounted && this.setState({noElements: false})
         
     }
     getData = (year,month,day,lat,lon) => {
@@ -132,6 +133,10 @@ class LandSatForm extends Component{
                         .then((resp) =>{
                             if(!resp.ok){
                                 this._isMounted && this.setState({noElements: true})
+                            }else{
+                                
+                                this._isMounted && this.setState({noElements: false})
+                                
                             }
                             return resp.json();
                         }) // Transform the data into json
@@ -163,10 +168,10 @@ class LandSatForm extends Component{
                 {e && 
                     <p className = "container">No Elements Available, try changing your date or location </p>
                 }
-                {!e && 
-                <div className = "offset-s6">
-                    <Gallery images={array_template}/>
-                </div>
+                {!e &&
+                    <div className = "offset-s6">
+                        <Gallery images={array_template}/>
+                    </div>
                 }
             </div>
             
