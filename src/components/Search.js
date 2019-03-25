@@ -34,9 +34,13 @@ class Search extends Component{
         
         const formType = this.props.formValues['selectedCategory'];
         console.log(formType);
-        let additionalForm,additionalForm1;
+        let additionalForm,additionalForm1,isDisabled;
 
        if(formType === '1'){
+        isDisabled =    <div class="input-field col s10">
+                            <input disabled value="Disabled for this category" id="disabled" type="text" class="validate"/>
+                            {/* <label for="disabled">Disabled</label> */}
+                        </div>
         additionalForm = <div className = "input-field col s2  ">   
                                 <input name = "latitude" 
                                     id = "input_lat"
@@ -47,7 +51,7 @@ class Search extends Component{
                                 />
                                 <label for="input_lat">Latitude</label>
                             </div>
-
+        
         additionalForm1 = <div className = "input-field col s2  ">   
                             <input name = "longitude"
                                 id = "input_long" 
@@ -60,16 +64,41 @@ class Search extends Component{
                             </div>
        }
        else if(formType==='2'){
-            additionalForm = <div className = "input-field col s2  ">   
-                                    <input name = "search1" 
-                                        id = "input_search"
-                                        type="text" 
-                                        className = "validate" 
-                                        // value={this.props.formValues["search"]} 
-                                        // onChange={this.props.handleInputChange}
-                                    />
-                                    <label for="input_search">Search the NASA Gallery!</label>
-                             </div>
+        isDisabled =    <div class="input-field col s10">
+                            <input disabled value="Disabled for this category" id="disabled" type="text" class="validate"/>
+                            {/* <label for="disabled">Disabled</label> */}
+                        </div>
+        additionalForm = <div className = "input-field col s2  ">   
+                            <input name = "latitude" 
+                                id = "input_lat"
+                                type="text"
+                                // className = "validate" 
+                                // value={this.props.formValues["latitude"]} 
+                                onChange={this.props.handleInputChange}
+                            />
+                            <label for="input_lat">Latitude</label>
+                        </div>
+
+        additionalForm1 = <div className = "input-field col s2  ">   
+                                <input name = "longitude"
+                                    id = "input_long" 
+                                    type="text"
+                                    // className = "validate" 
+                                    // value={this.props.formValues["longitude"]} 
+                                    onChange={this.props.handleInputChange}
+                                />
+                                <label for="input_long">Longitude</label>
+                            </div>
+       }else if(formType==='3'){
+            isDisabled =    <div className = "input-field col s10  ">   
+                                <input name = "search" 
+                                    id = "input_search"
+                                    type="text" 
+                                    className = "validate" 
+                                    value={this.props.formValues["search"]} 
+                                    onChange={this.props.handleInputChange}/>
+                                <label for="input_search">Search the NASA Gallery!</label>
+                            </div>   
         }
         return(
             <div className=" container search_box ">
@@ -79,15 +108,7 @@ class Search extends Component{
                     <div className="card-content">
                         <div className = "row">
                             
-                                <div className = "input-field col s10  ">   
-                                    <input name = "search" 
-                                           id = "input_search"
-                                           type="text" 
-                                           className = "validate" 
-                                           value={this.props.formValues["search"]} 
-                                           onChange={this.props.handleInputChange}/>
-                                    <label for="input_search">Search the NASA Gallery!</label>
-                                </div>    
+                                {isDisabled}  
                                 <button className="btn waves-effect waves-light" type="submit">Submit
                                     <i className="material-icons right">search</i>
                                 </button>
@@ -124,7 +145,7 @@ class Search extends Component{
                             </div>
                             <div className = "col s6">
                             
-                                <DayPickerInput name = "endDate" formatDate={formatDate}
+                                <DayPickerInput name = "endDate" format="M/D/YYYY" formatDate={formatDate}
                                     parseDate={parseDate}
                                     placeholder={`${formatDate(new Date(),'MM-DD-YYYY')}`} onDayChange={this.props.handleEndDateChange} />
                             </div>
@@ -150,9 +171,9 @@ class Search extends Component{
                                         <li className="divider" tabindex="-1"></li>
 
                                         <li  value = "Nasa Image & Video Library" onClick = {this.props.handleInputChange}><a name = "selectedCategory" data-id="3" href="#!">Nasa Image & Video Library</a></li>
-                                        <li className="divider" tabindex="-1"></li>
+                                        {/* <li className="divider" tabindex="-1"></li> */}
 
-                                        <li  value = "Mars Rover" onClick = {this.props.handleInputChange}><a name = "selectedCategory" data-id="4" href="#!">Mars Rover</a></li>
+                                        {/* <li  value = "Mars Rover" onClick = {this.props.handleInputChange}><a name = "selectedCategory" data-id="4" href="#!">Mars Rover</a></li> */}
                                         
 
                                         
