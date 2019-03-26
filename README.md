@@ -10,6 +10,9 @@ please readjust the browser a bit(height or width) to see the results of a query
 ## Date Entering Bug
 Please do no type the date, select it from the picker
 
+## Mixed Protocols Bug
+Please click the shield icon to allow the script to run. LandSat 8 Imagery using https while EPIC uses http
+
 # Next Steps
 1. Integrate the next API
 2. Integrate User Authentication( for which the framework is laid out)
